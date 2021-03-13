@@ -1,70 +1,89 @@
-console.log("loaded mapconv 0.01");
+let loadScript;
 
-const mapcnv = ()=>{};
-const loadScript = null;
+(() => {
 
-(()=>{
-  function test() {
-    console.log("test");
+  loadScript = (targetId) => {
+    // Add element
+    let template = `
+      <button id="runExcel2Yaml" class="ms-Button">
+        <span class="ms-Button-label">Excel -&gt; Yaml</span>
+      </button>
+      <button id="runYaml2Excel" class="ms-Button">
+        <span class="ms-Button-label" disabled>Excel &lt;- Yaml</span>
+      </button><br/>
+      <textarea id="textareaYaml" cols="80" rows="30">
+      </textarea>
+    `;
+
+    //$(targetId).append(_.template(template, data));
+    $(targetId).append(template);
+    $("#runExcel2Yaml").click(() => tryCatch(runExcel2Yaml));
+    //$("#runYaml2Excel").click(() => tryCatch(runYaml2Excel));
+
+    // load form CDN
+    $.getScript("https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js", () => {
+      console.log("loaded js-yaml");
+    });
   };
-  
-  mapcnv.test = test;
 
-  
-  async function runExcel2Yaml() {
-    let table = await excelTable2Json();
-    let map = await excel2MapText("B21:BW84");
-    //let dst = jsyaml.dump(Object.assign(table, "Map : |\r\n" + map));
-    let dst = `
+  /** logic */
+
+  const runExcel2Yaml = async () => {
+    await Excel.run(async (context) => {
+      let sheet = context.workbook.worksheets.getActiveWorksheet();
+      let range = sheet.getRange(ConfigCell).load();
+      await context.sync();
+      let json = JSON.parse(range.values[0][0])
+
+      let table = await excelTable2Json(context, sheet, json.Table);
+      let map = await excel2MapText(context, sheet, json.Map);
+
+      // let dst = jsyaml.dump(Object.assign(table, "Map : |\r\n" + map));
+      let dst = `
 ${jsyaml.dump(table)}
-Map : |
-${map}
+Map : |${map}
 `;
-    $("#textareaYaml").value = dst;
-  }
-
-  async function excelTable2Json() {
-    let dst = {}; 
-    await Excel.run(async (context) => {
-      let sheet = context.workbook.worksheets.getActiveWorksheet();
-      let range = sheet.getRange(ConfigJsonCell).load();
-      await context.sync();
-      dst = await getSheet(context, sheet, JSON.parse(range.values[0][0]));
+      // console.log(dst);
+      $("#textareaYaml").val(dst);
     });
-    return dst;
+
+
+
+
   }
 
-  async function excel2MapText(address) {
-    let dst = "";
-    await Excel.run(async (context) => {
-      let sheet = context.workbook.worksheets.getActiveWorksheet();
-      let range = sheet.getRange(address).load();
-
-      await context.sync();
-
-      let row = range.values.reduce(((acc, cur) => acc.concat(`\r\n  ${cur}`)), "  ");
-      dst = row.reduce((acc, cur) => acc + String(cur === "" ? " " : cur));
-    });
-    return dst;
-  }
-
-  async function getSheet(context, worksheet, obj) {
-    const sheet = worksheet;
+  const excelTable2Json = async(context, sheet, json) => {
     let range = {};
     let dst = {};
 
-    Object.keys(obj).forEach((key) => {
-      range[key] = sheet.getRange(obj[key]).load();
+    Object.keys(json).forEach((key) => {
+      range[key] = sheet.getRange(json[key]).load();
     });
 
     await context.sync();
 
-    Object.keys(obj).forEach((key) => {
+    Object.keys(json).forEach((key) => {
       dst[key] = range[key].values[0][0];
     });
 
     return dst;
   }
+
+  const excel2MapText = async (context, sheet, address) => {
+    let dst = "";
+    let range = sheet.getRange(address).load();
+
+    await context.sync();
+
+    dst = range.values.reduce((acc_row, cur_row) => {
+      let hoge = cur_row.reduce((acc_col, cur_col) => acc_col + String(cur_col === "" ? " " : cur_col), "");
+      return `${acc_row}\r\n  ${hoge}`;
+    }, "");
+
+    return dst;
+  }
+
+
 
   /*
   async function runYaml2Excel() {
@@ -82,7 +101,7 @@ ${map}
     });
   }
   */
-  
+
   /** Default helper for invoking an action and handling errors. */
   async function tryCatch(callback) {
     try {
@@ -91,33 +110,7 @@ ${map}
       console.error(error);
     }
   }
-  
-  loadScript = ((targetId)=> {
-    // Add element
-    let template = `
-      <button id="runExcel2Yaml" class="ms-Button">
-        <span class="ms-Button-label">Excel -&gt; Yaml</span>
-      </button>
-      <button id="runYaml2Excel" class="ms-Button">
-        <span class="ms-Button-label">Excel &lt;- Yaml</span>
-      </button>
-      <textarea id="textareaYaml">
-      </textarea>
-    `;
 
-    //$(targetId).append(_.template(template, data));
-    $(targetId).append(template);
-    //$("#runExcel2Yaml").click(() => tryCatch(runExcel2Yaml));
-    //$("#runYaml2Excel").click(() => tryCatch(runYaml2Excel));
-    
-    // load form CDN
-    $.getScript("https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js", () => {
-      console.log("loaded js-yaml");
-    });
-  });
-  
+  console.log("loaded mapcnv.js 0.01");
 })();
-
-
-
 
