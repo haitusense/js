@@ -107,8 +107,8 @@ ${map}
 
     //$(targetId).append(_.template(template, data));
     $(targetId).append(template);
-    $("#runExcel2Yaml").click(() => tryCatch(runExcel2Yaml));
-    $("#runYaml2Excel").click(() => tryCatch(runYaml2Excel));
+    //$("#runExcel2Yaml").click(() => tryCatch(runExcel2Yaml));
+    //$("#runYaml2Excel").click(() => tryCatch(runYaml2Excel));
     
     // load form CDN
     $.getScript("https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js", () => {
