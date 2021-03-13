@@ -19,7 +19,7 @@ function loadScript() {
   });
 }
 
-/*
+
 async function runExcel2Yaml() {
   await Excel.run(async (context) => {
     let sheet = context.workbook.worksheets.getActiveWorksheet();
@@ -32,6 +32,7 @@ async function runExcel2Yaml() {
   });
 }
 
+/*
 async function runYaml2Excel() {
   await Excel.run(async (context) => {
     let sheet = context.workbook.worksheets.getActiveWorksheet();
