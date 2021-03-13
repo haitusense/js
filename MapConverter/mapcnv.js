@@ -21,13 +21,11 @@ function loadScript(targetId) {
       <span class="ms-Button-label">Excel &lt;- Yaml</span>
     </button>
     <textarea id="textareaYaml">
-      ${targetId}
     </textarea>
   `;
 
-
   //$(targetId).append(_.template(template, data));
-  $(`#${targetId}`).append(template);
+  $(targetId).append(template);
 
   // load form CDN
   $.getScript("https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js", () => {
