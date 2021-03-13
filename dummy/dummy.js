@@ -1,6 +1,6 @@
 console.log("loaded dummy");
 
-async function loadScript() {
+function loadScript() {
   $.getScript("https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.0.0/mermaid.min.js", () => {
     console.log("loaded mermaid");
     let config = {
