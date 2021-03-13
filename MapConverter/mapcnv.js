@@ -1,4 +1,4 @@
-console.log("loaded mapconv 0.014");
+console.log("loaded mapconv 0.01");
 
 const mapcnv = ()=>{};
 const loadScript = null;
@@ -10,8 +10,9 @@ const loadScript = null;
   
   mapcnv.test = test;
 
+  
   async function runExcel2Yaml() {
-    let table = await ExcelTable2Json();
+    let table = await excelTable2Json();
     let map = await excel2MapText("B21:BW84");
     //let dst = jsyaml.dump(Object.assign(table, "Map : |\r\n" + map));
     let dst = `
@@ -19,14 +20,13 @@ ${jsyaml.dump(table)}
 Map : |
 ${map}
 `;
-    document.getElementById("textareaYaml").value = dst;
+    $("#textareaYaml").value = dst;
   }
 
-  async function ExcelTable2Json() {
+  async function excelTable2Json() {
     let dst = {}; 
     await Excel.run(async (context) => {
       let sheet = context.workbook.worksheets.getActiveWorksheet();
-      //let sheet = context.workbook.worksheets.getItem(sheetname);
       let range = sheet.getRange(ConfigJsonCell).load();
       await context.sync();
       dst = await getSheet(context, sheet, JSON.parse(range.values[0][0]));
@@ -42,7 +42,7 @@ ${map}
 
       await context.sync();
 
-      let row = range.values.reduce((acc, cur) => acc.concat(`\r\n  ${cur}`), "  "]);
+      let row = range.values.reduce(((acc, cur) => acc.concat(`\r\n  ${cur}`)), "  ");
       dst = row.reduce((acc, cur) => acc + String(cur === "" ? " " : cur));
     });
     return dst;
