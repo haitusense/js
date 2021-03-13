@@ -33,7 +33,7 @@ function loadScript(id) {
 
 async function runExcel2Yaml() {
   let table = await ExcelTable2Json();
-  let map = await excelTable2Yaml();
+  let map = await excel2MapText();
   let dst = jsyaml.dump(Object.assign(table, {"Map" : map}));
   document.getElementById("textareaYaml").value = dst;
 }
