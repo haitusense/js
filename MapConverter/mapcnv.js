@@ -1,4 +1,4 @@
-console.log("loaded mapconv 0.011");
+console.log("loaded mapconv 0.012");
 
 
 const mapconv =()=>{ };
@@ -13,26 +13,23 @@ const mapconv =()=>{ };
 
 function loadScript(targetId) {
   // Add element
-  let parent = document.getElementById(targetId);
+  let parent = $(targetId);
 
-  let element1 = document.createElement("button");
-  element1.innerText = "Excel -> Yaml";
-  // element1.idName = "runExcel2Yaml";  
-  element1.className = "ms-Button";
-  //element1.onclick = () => 
-  
-  let element2 = document.createElement("button");
-  element2.innerText = "Excel <- Yaml";
-  element2.className = "ms-Button";
-  //element2.onclick = () => 
-  
-  let element3 = document.createElement("textarea");
-  element3.idName = "textareaYaml";  
-  
-  parent.appendChild(element1);
-  parent.appendChild(element2);
-  parent.appendChild(element3);
-  
+  let template = [
+    '<button id="runExcel2Yaml" class="ms-Button">',
+    '  <span class="ms-Button-label">Excel -&gt; Yaml</span>',
+    '</button>',
+    '<button id="runYaml2Excel" class="ms-Button">',
+    '  <span class="ms-Button-label">Excel &lt;- Yaml</span>',
+    '</button>',
+    
+    '<textarea id="textareaYaml" row="10" col="3">',
+    '</textarea>',
+  ].join("");
+
+  //$(targetId).append(_.template(template, data));
+  $(targetId).append(template);
+
   // load form CDN
   $.getScript("https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js", () => {
     console.log("loaded js-yaml");
