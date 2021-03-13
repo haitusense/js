@@ -26,8 +26,12 @@ function loadScript(targetId) {
   element2.className = "ms-Button";
   //element2.onclick = () => 
   
+  let element3 = document.createElement("textarea");
+  element3.idName = "textareaYaml";  
+  
   parent.appendChild(element1);
   parent.appendChild(element2);
+  parent.appendChild(element3);
   
   // load form CDN
   $.getScript("https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js", () => {
