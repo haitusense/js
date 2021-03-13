@@ -1,4 +1,4 @@
-const loadScript = null;
+let loadScript;
 
 (() => {
 
