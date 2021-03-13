@@ -32,15 +32,36 @@ function loadScript(id) {
 
 
 async function runExcel2Yaml() {
+  let table = await ExcelTable2Json();
+  let map = await excelTable2Yaml();
+  let dst = jsyaml.dump(Object.assign(table, {"Map" : map}));
+  document.getElementById("textareaYaml").value = dst;
+}
+
+async function ExcelTable2Json() {
+  let dst = {}; 
   await Excel.run(async (context) => {
     let sheet = context.workbook.worksheets.getActiveWorksheet();
     //let sheet = context.workbook.worksheets.getItem(sheetname);
     let range = sheet.getRange(ConfigJsonCell).load();
     await context.sync();
-
-    let dst = await getSheet(context, sheet, JSON.parse(range.values[0][0]));
-    document.getElementById("textareaYaml").value = jsyaml.dump(dst);
+    dst = await getSheet(context, sheet, JSON.parse(range.values[0][0]));
   });
+  return dst;
+}
+
+async function excel2MapText(address) {
+  let dst = "";
+  await Excel.run(async (context) => {
+    let sheet = context.workbook.worksheets.getActiveWorksheet();
+    let range = sheet.getRange(address).load();
+
+    await context.sync();
+
+    let row = range.values.reduce((acc, cur) => acc.concat("\r\n", cur));
+    dst = row.reduce((acc, cur) => acc + String(cur === "" ? " " : cur));
+  });
+  return dst;
 }
 
 async function getSheet(context, worksheet, obj) {
