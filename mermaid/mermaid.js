@@ -32,7 +32,7 @@ let loadScript;
 
     // load form CDN
     $.getScript("https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.0.0/mermaid.min.js", () => {
-      console.log("loaded mermaid");
+      console.log("loaded mermaid.min.js");
       let config = {
         startOnLoad: true,
         theme: "forest",
@@ -55,5 +55,5 @@ let loadScript;
     }
   }
 
-  console.log("loaded mermaid");
+  console.log("loaded haitusense mermaid.js");
 })();
