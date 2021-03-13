@@ -32,6 +32,24 @@ async function runExcel2Yaml() {
   });
 }
 
+async function getSheet(context, worksheet, obj) {
+  const sheet = worksheet;
+  let range = {};
+  let dst = {};
+
+  Object.keys(obj).forEach((key) => {
+    range[key] = sheet.getRange(obj[key]).load();
+  });
+
+  await context.sync();
+
+  Object.keys(obj).forEach((key) => {
+    dst[key] = range[key].values[0][0];
+  });
+
+  return dst;
+}
+
 /*
 async function runYaml2Excel() {
   await Excel.run(async (context) => {
@@ -52,22 +70,5 @@ async function runYaml2Excel() {
   });
 }
 
-async function getSheet(context, worksheet, obj) {
-  const sheet = worksheet;
-  let range = {};
-  let dst = {};
-
-  Object.keys(obj).forEach((key) => {
-    range[key] = sheet.getRange(obj[key]).load();
-  });
-
-  await context.sync();
-
-  Object.keys(obj).forEach((key) => {
-    dst[key] = range[key].values[0][0];
-  });
-
-  return dst;
-}
 
 */
