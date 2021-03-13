@@ -34,8 +34,9 @@ function loadScript(id) {
 async function runExcel2Yaml() {
   let table = await ExcelTable2Json();
   let map = await excel2MapText("B21:BW84");
-  let dst = jsyaml.dump(Object.assign(table, {"Map" : map}));
-  document.getElementById("textareaYaml").value = dst;
+  //let dst = jsyaml.dump(Object.assign(table, "Map : |\r\n" + map));
+  let dst = jsyaml.dump(table) + "\r\nMap : |\r\n" + map;
+  document.getElementById("textareaYaml").value = ;
 }
 
 async function ExcelTable2Json() {
@@ -58,7 +59,7 @@ async function excel2MapText(address) {
 
     await context.sync();
 
-    let row = range.values.reduce((acc, cur) => acc.concat("\r\n", cur));
+    let row = range.values.reduce((acc, cur) => acc.concat("\r\n  ", cur));
     dst = row.reduce((acc, cur) => acc + String(cur === "" ? " " : cur));
   });
   return dst;
