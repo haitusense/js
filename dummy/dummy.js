@@ -1,6 +1,17 @@
-console.log("loaded dummy");
+console.log("loaded dummy 0.01");
 
-function loadScript() {
+function loadScript(id) {
+  // Add element
+  let parent = document.getElementById(id);
+  let element = document.createElement("button");
+  element.innerText = "Dummy Buttob";
+  element.className = "ms-Button";
+  element.onclick = function () {
+    element.innerText += " クリックされました!";
+  };
+  parent.appendChild(element);
+
+  // load form CDN
   $.getScript("https://cdnjs.cloudflare.com/ajax/libs/mermaid/8.0.0/mermaid.min.js", () => {
     console.log("loaded mermaid");
     let config = {
