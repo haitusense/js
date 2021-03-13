@@ -1,14 +1,14 @@
-console.log("loaded mapconv 0.01");
+console.log("loaded mapconv 0.011");
 
-/*
-const mapconv;
-*/
+
+const mapconv =()=>{ };
+
 (()=>{
   function test() {
     console.log("test");
   };
   
-  //mapconv.test = test;
+  mapconv.test = test;
 })();
 
 function loadScript(targetId) {
