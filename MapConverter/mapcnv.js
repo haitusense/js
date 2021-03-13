@@ -13,8 +13,6 @@ const mapconv =()=>{ };
 
 function loadScript(targetId) {
   // Add element
-  let parent = $(targetId);
-  
   let template = `
     <button id="runExcel2Yaml" class="ms-Button">
       <span class="ms-Button-label">Excel -&gt; Yaml</span>
@@ -22,12 +20,14 @@ function loadScript(targetId) {
     <button id="runYaml2Excel" class="ms-Button">
       <span class="ms-Button-label">Excel &lt;- Yaml</span>
     </button>
+    <textarea id="textareaYaml">
+      ${targetId}
+    </textarea>
   `;
-//    '<textarea id="textareaYaml" row="10" col="3">',
-//    '</textarea>',
+
 
   //$(targetId).append(_.template(template, data));
-  $(targetId).append(template);
+  $(`#${targetId}`).append(template);
 
   // load form CDN
   $.getScript("https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js", () => {
