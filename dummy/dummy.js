@@ -4,7 +4,7 @@ function loadScript(id) {
   // Add element
   let parent = document.getElementById(id);
   let element = document.createElement("button");
-  element.innerText = "Dummy Buttob";
+  element.innerText = "Dummy Button";
   element.className = "ms-Button";
   element.onclick = function () {
     element.innerText += " クリックされました!";
