@@ -1,5 +1,6 @@
 console.log("loaded mapconv 0.01");
 
+/*
 const mapconv;
 
 (()=>{
@@ -9,7 +10,7 @@ const mapconv;
   
   mapconv.test = test;
 })();
-
+*/
 function loadScript(targetId) {
   // Add element
   let parent = document.getElementById(targetId);
