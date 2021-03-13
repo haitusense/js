@@ -36,7 +36,7 @@ async function runExcel2Yaml() {
   let map = await excel2MapText("B21:BW84");
   //let dst = jsyaml.dump(Object.assign(table, "Map : |\r\n" + map));
   let dst = jsyaml.dump(table) + "\r\nMap : |\r\n" + map;
-  document.getElementById("textareaYaml").value = ;
+  document.getElementById("textareaYaml").value = dst;
 }
 
 async function ExcelTable2Json() {
