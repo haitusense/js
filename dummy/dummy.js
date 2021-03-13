@@ -16,10 +16,10 @@ function loadScript() {
   });
   $.getScript("https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.0.0/js-yaml.min.js", () => {
     console.log("loaded js-yaml");
-    //console.log(jsyaml);
   });
 }
 
+/*
 async function runExcel2Yaml() {
   await Excel.run(async (context) => {
     let sheet = context.workbook.worksheets.getActiveWorksheet();
@@ -69,4 +69,4 @@ async function getSheet(context, worksheet, obj) {
   return dst;
 }
 
-
+*/
