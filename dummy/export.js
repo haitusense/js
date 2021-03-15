@@ -1,3 +1,5 @@
+'use strict';
+
 define([],()=>{
-  return ()=>{console.log("A")}
+  return (()=>{console.log("A")})
 });
