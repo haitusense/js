@@ -49,6 +49,12 @@ define([],()=>{
       .fill(fill)
       .map((i) => Array(col).fill(fill));
 
+  
+  const createArray = (row, col, fill) =>
+    Array(row)
+      .fill(fill)
+      .map((i) => Array(col).fill(fill));
+  /*
   return {
     bottom : 0, 
     left : 1, 
@@ -59,6 +65,8 @@ define([],()=>{
     rightRotation : rightRotation, 
     leftRotation : leftRotation
   };
-
+  */
+  
+  return (()=>{console.log("A")})
 });
 
