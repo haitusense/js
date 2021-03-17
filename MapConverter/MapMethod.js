@@ -9,7 +9,7 @@ define([],()=>{
     right : 3
   }
   
-  const rotationAscii(src: any[][], formRot = 0, toRot = 0, head == "") {
+  const rotationAscii(src, formRot = 0, toRot = 0, head = "") {
     formRot = isNaN(formRot) ? direction[String(formRot).toLowerCase()] : formRot;
     toRot = isNaN(toRot) ? direction[String(toRot).toLowerCase()] : toRot;
     return toAscii(rotation(src, toRot - formRot), head);
