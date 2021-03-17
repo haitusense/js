@@ -9,13 +9,13 @@ define([],()=>{
     right : 3
   }
   
-  const rotationAscii(src, formRot = 0, toRot = 0, head = "") {
+  const rotationAscii = (src, formRot = 0, toRot = 0, head = "") => {
     formRot = isNaN(formRot) ? direction[String(formRot).toLowerCase()] : formRot;
     toRot = isNaN(toRot) ? direction[String(toRot).toLowerCase()] : toRot;
     return toAscii(rotation(src, toRot - formRot), head);
   };
   
-  const toAscii=(src, head = "")=>{
+  const toAscii = (src, head = "") => {
     const blank = " ";
     return src.reduce((acc_row, cur_row) => {
       let hoge = cur_row.map((x) => (x === "" ? blank : String(x))).join("");
@@ -23,7 +23,7 @@ define([],()=>{
     }, "");
   };
 
-  const rotation =(src, rot = 1)=> {
+  const rotation = (src, rot = 1) => {
     if (rot > 0) {
       return rotation( rightRotation(src), rot - 1);
     } else if (rot < 0) {
