@@ -2,11 +2,6 @@
 
 define([],()=>{
 
-  const bottom = 0;
-  const left = 1;
-  const top = 2;
-  const right = 3;
-
   const toAscii=(src: any[][], head = "")=>{
     const blank = " ";
     return src.reduce((acc_row, cur_row) => {
@@ -54,11 +49,16 @@ define([],()=>{
       .fill(fill)
       .map((i) => Array(col).fill(fill));
 
-  return ({
-    bottom, left, top, right,
-    toAscii,
-    rotation, rightRotation, leftRotation
-  });
+  return {
+    bottom : 0, 
+    left : 1, 
+    top : 2,
+    right : 3,
+    toAscii : toAscii,
+    rotation : toAscii, 
+    rightRotation : rightRotation, 
+    leftRotation : leftRotation
+  };
 
 });
 
