@@ -2,7 +2,7 @@
 
 define([],()=>{
 
-  const toAscii=(src: any[][], head = "")=>{
+  const toAscii=(src, head = "")=>{
     const blank = " ";
     return src.reduce((acc_row, cur_row) => {
       let hoge = cur_row.map((x) => (x === "" ? blank : String(x))).join("");
@@ -10,7 +10,7 @@ define([],()=>{
     }, "");
   };
 
-  const rotation =(src: any[][], rot = 1)=> {
+  const rotation =(src, rot = 1)=> {
     if (rot > 0) {
       return rotation( rightRotation(src), rot - 1);
     } else if (rot < 0) {
@@ -20,7 +20,7 @@ define([],()=>{
     }
   };
 
-  const rightRotation = (src: any[][]) => {
+  const rightRotation = (src) => {
     let srcRow = src.length;
     let srcCol = src[0].length;
     let dst = createArray(srcCol, srcRow, -1);
@@ -32,7 +32,7 @@ define([],()=>{
     return dst;
   };
 
-  const leftRotation = (src: any[][]) => {
+  const leftRotation = (src) => {
     let srcRow = src.length;
     let srcCol = src[0].length;
     let dst = createArray(srcCol, srcRow, -1);
