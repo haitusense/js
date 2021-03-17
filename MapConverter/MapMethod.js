@@ -49,24 +49,18 @@ define([],()=>{
       .fill(fill)
       .map((i) => Array(col).fill(fill));
 
-  
-  const createArray = (row, col, fill) =>
-    Array(row)
-      .fill(fill)
-      .map((i) => Array(col).fill(fill));
-  /*
   return {
     bottom : 0, 
     left : 1, 
     top : 2,
     right : 3,
     toAscii : toAscii,
-    rotation : toAscii, 
+    rotation : rotation, 
     rightRotation : rightRotation, 
     leftRotation : leftRotation
   };
-  */
   
-  return (()=>{console.log("A")})
+  
+  //return (()=>{console.log("A")})
 });
 
