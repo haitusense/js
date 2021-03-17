@@ -50,10 +50,6 @@ define([],()=>{
       .map((i) => Array(col).fill(fill));
 
   return {
-    bottom : 0, 
-    left : 1, 
-    top : 2,
-    right : 3,
     toAscii : toAscii,
     rotation : rotation, 
     rightRotation : rightRotation, 
