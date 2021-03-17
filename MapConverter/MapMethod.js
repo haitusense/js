@@ -1,4 +1,4 @@
-define([],() => {
+define(() => {
 
   const bottom = 0;
   const left = 1;
