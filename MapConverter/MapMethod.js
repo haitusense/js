@@ -1,4 +1,6 @@
-define(() => {
+'use strict';
+
+define([],()=>{
 
   const bottom = 0;
   const left = 1;
@@ -52,11 +54,11 @@ define(() => {
       .fill(fill)
       .map((i) => Array(col).fill(fill));
 
-  return {
+  return ({
     bottom, left, top, right,
     toAscii,
     rotation, rightRotation, leftRotation
-  };
+  });
 
 });
 
