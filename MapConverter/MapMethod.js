@@ -1,4 +1,4 @@
-define(() => {
+define([],() => {
 
   const MapMethod = {
     bottom: 0,
